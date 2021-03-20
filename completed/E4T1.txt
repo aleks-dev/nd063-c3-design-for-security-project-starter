@@ -1,0 +1,9 @@
+
+
+# Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+The SSH ports of both the 2 EC2 instances should be closed for "wide open" Internet access via editing their EC2 Security Groups where the access can be limited to specific IP addresses / CIDR ranges, or to specific Security Groups.
+Both the EC2 instances should be placed inside Private Subnet(s) and be accessible only indirectly, via the Application Load Balancer.
+
+# Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
+Assuming that the EC2 instance is still accessible via API credentials, it could be limited (via its Security Group) to be accessed only from specific IP addresses / CIDR ranges, only via specific protocols on the same 5000 port.
+Additionally, the S3 buckets could be fully encrypted and even more, they could be configured to allow only Reads (GET Requests) only via so-called pre-signed URLs. In this scenario, the User should first sign-in with a 3rd party Authentication provider and only then be able to get a pre-signed URL as a Response from the S3 bucket, via which the Secret Recipes would be downloaded. 

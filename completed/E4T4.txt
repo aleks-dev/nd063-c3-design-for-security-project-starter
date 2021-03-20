@@ -1,0 +1,19 @@
+
+# What additional architectural change can be made to reduce the internet facing attack surface of the web application instance.
+Move both the EC2 instances into separate private Subnets connected with each other via Security Groups / NACLs and private VPC endpoints.
+Put WAF protection in front of the App Load Balancer.
+Use Route53 for "scanning" the incoming Requests, which should be only via the HTTPS protocol.
+Make only the Web App instance communicate with the S3 buckets via private VPC endpoints.
+Make the Secret Recipe S3 Security Group allowing incoming requests only from the Web App instance via HTTPS.
+Additionaly, make the Secret Recipe S3 bucket allow only Read requests and send only pre-signed URL type of Responses.
+
+
+# Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
+
+
+
+# Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
+No, for encrypting the existing S3 data an additional operation (usually a so-called Batch Encryption) needs to be called separately.
+
+
+# What would happen if the original cloud formation templates are applied to this environment.
