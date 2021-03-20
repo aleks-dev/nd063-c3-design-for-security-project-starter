@@ -1,0 +1,13 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+# Poor practice 1
+The Secret S3 bucket is not in a private Subnet. Even worse, it can be accessed directly from the Attack EC2 instance via API key only.
+The initial configuration exposes it maximally to almost all kinds of attacks as it's accessible without requiring HTTPS/SSL for that.
+On the top of this comes its content which is not being encrypted.
+
+# Poor practice 2
+The web application server is not in a private Subnet. Even worse, it can be accessed via HTTP and the public ElasticIP address, making it "wide open" to the Internet and very vulnerable.
+On the top of this is the fact that its EBS volume is unencrypted.
+
+# Poor practice 3
+The Application Load Balancer is also "wide open" to the Internet by being accessed via HTTP instead of HTTPS from all possible addresses.
