@@ -1,0 +1,44 @@
+Findings based on SecurityHub:
+a) CIS AWS Foundations Benchmark v1.2.0:
+1. CloudTrail should be enabled for all Regions (including this Region)
+2. No security groups should allow ingress from 0.0.0.0/0 to port 22  - related to WebAppSG and AttackInstanceSG
+3. No security groups should allow ingress from 0.0.0.0/0 to port 3389 - related to WebAppSG
+4. Missing alarms for: unauthorized API calls, security group changes, changes to Network Access Control Lists (NACL), changes to network gateways, changes to route tables, VPC changes,  S3 bucket policy changes, AWS Config configuration changes. 
+
+b) AWS Foundational Security Best Practices v1.0.0:
+1. EC2 instances should use Instance Metadata Service Version 2 (IMDSv2) - related to instances "RecipeWebServiceInstance" and "AttackInstance".
+2. EC2 instances should not have a public IPv4 address - related to instances "RecipeWebServiceInstance" and "AttackInstance".
+3. CloudTrail should be enabled and configured with at least one multi-region trail
+4. S3 buckets should have server-side encryption enabled - related to all 3 S3 buckets.
+5. S3 buckets should require requests to use Secure Socket Layer- related to all 3 S3 buckets.
+6. EC2 should be configured to use VPC endpoints - related to the VPC.
+7. Attached EBS volumes should be encrypted at-rest- related to both the EC2 instances.
+8. EC2 instances should be managed by AWS Systems Manager - related to both the EC2 instances.
+9. Application Load Balancers (ALBs) should be configured to drop http headers - related to c1-web-service-alb.
+10.Application Load Balancer deletion protection should be enabled - related to c1-web-service-alb.
+11.Application Load Balancer should be configured to redirect all HTTP requests to HTTPS - related to c1-web-service-alb.
+
+
+Findings based on AWSConfig:
+1. EBS volumes of the EC2 instances should be encrypted by default- related to both the EC2 instances.
+2. EC2 instances should not have a public IPv4 addresses - related to both the EC2 instances.
+3. EC2 instances should be managed by AWS Systems Manager - related to both the EC2 instances.
+4. Application Load Balancers (ALBs) should be configured to drop http headers - related to c1-web-service-alb.
+5. Elastic Load Balancing should have deletion protection enabled - related to c1-web-service-alb.
+6. Application Load Balancers (ALBs) should have logging enabled - related to c1-web-service-alb.
+7.1 The incoming RDP traffic should be restricted (not allowed from 0.0.0.0./0) - related to the EC2 SecurityGroup "WebAppSG" .
+7.2 The incoming SSH traffic should be restricted (not allowed from 0.0.0.0./0) - related to both the EC2 SecurityGroups "WebAppSG" and "AttackInstanceSG".
+8. The EC2 instances metadata version should be configured with Instance Metadata Service Version 2 (IMDSv2) - related to both the EC2 instances.
+9. The HTTP to HTTPS redirection should be configured on all HTTP listeners of Application Load Balancers - related to c1-web-service.
+11 Logging should be enabled for S3 buckets - relates to all 3 S3 buckets.
+12 S3 buckets should either has Amazon S3 default encryption enabled or their S3 bucket policy should explicitly deny put-object requests without server side encryption - relates to all 3 S3 buckets.
+13 S3 buckets should have policies that require requests to use Secure Socket Layer (SSL) - relates to all 3 S3 buckets.
+14 The Service Endpoint for the service provided in rule parameter should be created for each VPC - relates to the EC2 VPC.
+15 CloudTrail should be enabled for all Regions (including this Region).
+
+Findings based on Amazon Inspector:
+Belong to all 3 categories (High, Medium and Low severity) :
+1. Multiple UDP security ports (20,21,22,23,67,68,88,111...) on the "RecipeWebServiceInstance" associated with different protocols (Telnet, SSH, WINS, DHCP, FTP, RDP, NFS, LDAP, Kerberos, SQLServer, RPC, NetBios, HTTP, HTTPS, SMB, SysLog...) are reachable from the Internet.
+These ports should be closed for Internet access via editing the "WebAppSG" Security Group
+2. Multiple TCP security ports (20,21,22,23,543,636,749...) on the "RecipeWebServiceInstance" associated with different protocols (Telnet, SSH, WINS, FTP, RDP, NFS, LDAP, Kerberos, SQLServer, Oracle, MongoDB, PostgreSQL...) are reachable from the Internet.
+These ports should be closed for Internet access via editing the "WebAppSG" Security Group
