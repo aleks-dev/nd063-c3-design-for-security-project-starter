@@ -1,0 +1,51 @@
+# Identify tools that will allow you to do the following:
+
+## Scan infrastructure as code templates
+For CloudFormation IaC Templates, tools for scanning them would be 
+1. CloudSploit  - https://cloudsploit.com/opensource
+2. AWS CloudFormation Linter - https://github.com/aws-cloudformation/cfn-python-lint
+
+For Terraform IaC Templates, tools for scanning them would be 
+1. Chef InSpec - https://github.com/inspec/inspec
+2. Regula - https://github.com/fugue/regula
+3. Terrascan - https://github.com/accurics/terrascan
+
+
+### Example vulnerability for infrastructure as code templates
+1. Hard Coding Secrets or Resource References
+2. Committing Terraform State Files into a Version Control
+3. Not Performing Sanity and Security Checks Before or After Deployment
+4. Using Untrusted Images or Plugins
+
+
+## Scan AMI’s or containers for OS vulnerabilities
+For containers' scanning for OS vulnerabilities, some popular tools would be
+1. AWS Inspector
+2. Anchore (open-source) - https://anchore.com/
+3. Trivy (open-source) - https://github.com/aquasecurity/trivy
+4. Aquasec (comercial) - https://www.aquasec.com/
+5. Sysdig (comercial) - https://sysdig.com/
+
+For AMI's scanning for OS vulnerabilities, some popular tools would be
+1. AWS Inspector - https://aws.amazon.com/blogs/security/how-to-set-up-continuous-golden-ami-vulnerability-assessments-with-amazon-inspector/
+2. Digital Defense Frontline Vulnerability Manager - https://help.frontline.cloud/vm/en-us/Topics_MS/Install%20AWS%20AMI%20Scanner_AD.htm
+3. Tenable Nessus - https://www.tenable.com/nessus-demo
+
+
+### Example OS vulnerability in AMI or containers
+1. Windows - CryptoAPI spoofing vulnerability – CVE-2020-0601
+2. Windows - Remote Desktop Client Vulnerability – CVE-2020-0611
+3. Linux - Kernel netfilter:xt_TCPMSS - CVE-2017-18017
+4. Linux - In the Linux kernel through 5.3.2, cfg80211_mgd_wext_giwessid in net/wireless/wext-sme.c does not reject a long SSID IE, leading to a Buffer Overflow - CVE-2019-17133
+5. Docker - RunC Root Access Remote Execution -  CVE-2019-5736
+6. Docker - Skeleton Runtime for Apache OpenWhisk - CVE-2018-11757
+
+## Scan an AWS environment for cloud configuration vulnerabilities
+1. AWS Config
+2. Tenable.io - https://aws.amazon.com/marketplace/pp/B07J2HN7KV
+3. Qualys Vulnerability Management - https://aws.amazon.com/marketplace/pp/B07JGH7W7V
+
+### Example vulnerability for AWS cloud configuration
+1. Misconfigured S3 buckets
+2. Exposed Database Origin Servers
+3. Hanging DNS Records - when an S3 bucket is deleted, many forget to remove references to it across all subdomains. This is a problem, because if a subdomain’s DNS records stay pointed to a deleted S3 bucket, an attacker can use subdomain enumeration to identify the issue and simply take over the subdomain.

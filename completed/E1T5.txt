@@ -2,7 +2,7 @@ Based on the architecture diagram, and the steps you have taken so far to upload
 
 # Poor practice 1
 The Secret S3 bucket is not in a private Subnet. Even worse, it can be accessed directly from the Attack EC2 instance via API key only.
-The initial configuration exposes it maximally to almost all kinds of attacks as it's accessible without requiring HTTPS/SSL for that.
+The initial configuration exposes it maximally to almost all kinds of attacks and it's accessible to the internet even without requiring HTTPS/SSL for the connections.
 On the top of this comes its content which is not being encrypted.
 
 # Poor practice 2
