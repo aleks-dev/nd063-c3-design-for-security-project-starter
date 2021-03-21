@@ -1,0 +1,20 @@
+# Describe GuardDuty findings that were detected related to the brute force attack
+There were 2 groups of findings from GuardDuty, both of the "UnauthorizedAccess:EC2/SSHBruteForce" type: 
+
+1 of them was categorized as "High severity". 
+It related to the AttackInstance describing that this instance was performing SSH brute force attacks against the other EC2 instance (RecipeWebServiceInstance).
+This finding reported lots of details related to the attack, like the AWS Region where it happened, number of attacks, the AWS Account from where they came.
+As of the EC2 Resource which was the "attacker" there were many details (Port from which the attack was done, Resource type, Instance type, Instance ID, its AZ and even AMI ID and time of the attack launch).
+Additionaly there were details about the IAM (Attacker) instance profile's ARN and Key, and few IDs of its VPC, Subnet, Network interface and private and public IPs as well as DNS names.		
+The Private IP addresses (DNS and IP) of the Attacker instance were also provided, together with the ID and Name of its Security Group.
+Finaly the details of the attacking Action were also provided - it was an Outbound Network connection via TCP and and SSH port.
+The local IPs of both the Attacker and Attacked instances were provided as well, together with the port 22 via which the Attacked instance was accessed.
+
+The 2nd group of findings from GuardDuty was categorized as "Low severity". 
+It related to the attacked Web App Instance (named "RecipeWebServiceInstance") and contained the same categories and fields of data as the 1st one (above) with that difference that most of them related to this (attacked) instance, and couple of them (IP Address and Port) were about the Attacker EC2 instance.
+
+
+# Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
+In this case, AWS Guard Duty seems to have collected the data about the brute force attacks from the VPC Flow Logs which were collected and stored about this VPC into the "S3BucketVPCFlowLogs" S3 bucket. 
+Then, probably by applying its ML (Machine Learning), anomaly detection and integrated threat intelligence over these VPC Flow Logs, AWS Guard Duty was able to figure out that brute force attacks were taking place from one of the EC2 instances towards the other one. 
+These detailed findings were recorded very fast, appearing under my AWS GuardDuty dashboard in less than 15 minutes after the attacks started
