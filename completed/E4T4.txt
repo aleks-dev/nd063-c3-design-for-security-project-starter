@@ -1,15 +1,17 @@
 
 # What additional architectural change can be made to reduce the internet facing attack surface of the web application instance.
-Move both the EC2 instances into separate private Subnets connected with each other via Security Groups / NACLs and private VPC endpoints.
-Put WAF protection in front of the App Load Balancer.
-Use Route53 for "scanning" the incoming Requests, which should be only via the HTTPS protocol.
-Make only the Web App instance communicate with the S3 buckets via private VPC endpoints.
-Make the Secret Recipe S3 Security Group allowing incoming requests only from the Web App instance via HTTPS.
+1. Move both the EC2 instances into separate private Subnets connected with each other via Security Groups / NACLs.
+2. Put WAF protection in front of the App Load Balancer.
+3. Use Route53 for "scanning" the incoming Requests, which should be only via the HTTPS protocol.
+4. Make only the Web App instance communicate with the Free recipes S3 bucket via private VPC endpoints.
+5. Make the Secret recipes S3 bucket accessible only via private VPC endpoints.
+Assign it a Security Group (or its own Bucket Policy / permissions) allowing incoming requests only from specific private IP address, private CIDR range or another Security Group coming from a secure private Subnet.
 Additionaly, make the Secret Recipe S3 bucket allow only Read requests and send only pre-signed URL type of Responses.
 
 
 # Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
-
+Creating private VPC endpoints for the S3 would prevent the unauthorized access to the secrets bucket if that bucket would be properly hardened via its own SecurityGroup or its own Bucket Policy / permissions, 
+which would allow access to it via these private VPC endpoints only from specific private IP address, private CIDR range or another Security Group coming from a secure private Subnet.
 
 
 # Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
@@ -17,3 +19,6 @@ No, for encrypting the existing S3 data an additional operation (usually a so-ca
 
 
 # What would happen if the original cloud formation templates are applied to this environment.
+If the original CF Templates are applied to this environment, the settings which are contained in these CF Templates and were additionaly hardened, would be again reset to their initial state (i.e. in effect their appropriate resources would be again weakened).
+The additional hardening settings which were applied after the deployment of the initial CF script, and which are not contained within the original CF Templates, would still remain active after re-application of these Templates, 
+and thus the overall environment, even though weakened by this re-application of the original CF Templates, would be more secure than the initial one (because of these additional hardening settings which would still stay effective).
