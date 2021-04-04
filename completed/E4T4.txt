@@ -12,7 +12,7 @@ Additionaly, make the Secret Recipe S3 bucket allow only Read requests and send 
 # Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
 Creating private VPC endpoints for the S3 would prevent the unauthorized access to the secrets bucket only if that bucket would be additionaly properly hardened (for ex. via its own SecurityGroup or its own Bucket Policy / permissions), 
 which would allow access to it via these private VPC endpoints only from specific private IP address, private CIDR range or another Security Group coming from a secure private Subnet.
-
+Even more, we can use a deny statement in the Secrets' bucket policy to restrict access to specific IAM users, even if the users are granted access in an IAM policy.
 
 # Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
 No, for encrypting the existing S3 data an additional operation (usually a so-called Batch Encryption) needs to be called separately.

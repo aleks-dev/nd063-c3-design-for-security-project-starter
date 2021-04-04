@@ -1,0 +1,126 @@
+[
+  {
+    "schemaVersion": "2.0",
+    "accountId": "492383393326",
+    "region": "us-east-1",
+    "partition": "aws",
+    "id": "a6bc27f658bde51830d2e62c4122ce04",
+    "arn": "arn:aws:guardduty:us-east-1:492383393326:detector/26bc27d6af9a68cbe4b1b9cca63b5556/finding/a6bc27f658bde51830d2e62c4122ce04",
+    "type": "UnauthorizedAccess:EC2/SSHBruteForce",
+    "resource": {
+      "resourceType": "Instance",
+      "instanceDetails": {
+        "instanceId": "i-08a2f3de02a01bd6c",
+        "instanceType": "t3.micro",
+        "launchTime": "2021-03-20T09:22:16Z",
+        "platform": null,
+        "productCodes": [],
+        "iamInstanceProfile": {
+          "arn": "arn:aws:iam::492383393326:instance-profile/c3-app-InstanceProfileRole-12MJGOGK7WZRU",
+          "id": "AIPAXFJCWKYXDEBHYXSOH"
+        },
+        "networkInterfaces": [
+          {
+            "ipv6Addresses": [],
+            "networkInterfaceId": "eni-0b180fb57449fcb52",
+            "privateDnsName": "ip-10-192-11-23.ec2.internal",
+            "privateIpAddress": "10.192.11.23",
+            "privateIpAddresses": [
+              {
+                "privateDnsName": "ip-10-192-11-23.ec2.internal",
+                "privateIpAddress": "10.192.11.23"
+              }
+            ],
+            "subnetId": "subnet-063e7d1a28fdde8d8",
+            "vpcId": "vpc-0cc4137a6fbde09ab",
+            "securityGroups": [
+              {
+                "groupName": "AttackInstanceSG",
+                "groupId": "sg-0f225a5ec7c9a7c73"
+              }
+            ],
+            "publicDnsName": "ec2-18-234-50-54.compute-1.amazonaws.com",
+            "publicIp": "18.234.50.54"
+          }
+        ],
+        "outpostArn": null,
+        "tags": [
+          {
+            "key": "aws:cloudformation:stack-name",
+            "value": "c3-app"
+          },
+          {
+            "key": "Name",
+            "value": "Attack Instance - C3"
+          },
+          {
+            "key": "aws:cloudformation:logical-id",
+            "value": "AttackInstance"
+          },
+          {
+            "key": "aws:cloudformation:stack-id",
+            "value": "arn:aws:cloudformation:us-east-1:492383393326:stack/c3-app/6c4ef5d0-895d-11eb-8495-122ea9c7f0ef"
+          }
+        ],
+        "instanceState": "running",
+        "availabilityZone": "us-east-1b",
+        "imageId": "ami-01fcf79ce78f46764",
+        "imageDescription": ""
+      }
+    },
+    "service": {
+      "serviceName": "guardduty",
+      "detectorId": "26bc27d6af9a68cbe4b1b9cca63b5556",
+      "action": {
+        "actionType": "NETWORK_CONNECTION",
+        "networkConnectionAction": {
+          "connectionDirection": "OUTBOUND",
+          "remoteIpDetails": {
+            "ipAddressV4": "10.192.10.14",
+            "organization": {
+              "asn": "0",
+              "asnOrg": "",
+              "isp": "",
+              "org": ""
+            },
+            "country": {
+              "countryName": null
+            },
+            "city": {
+              "cityName": ""
+            },
+            "geoLocation": {
+              "lat": 0,
+              "lon": 0
+            }
+          },
+          "remotePortDetails": {
+            "port": 22,
+            "portName": "SSH"
+          },
+          "localPortDetails": {
+            "port": 58820,
+            "portName": "Unknown"
+          },
+          "protocol": "TCP",
+          "blocked": false,
+          "localIpDetails": {
+            "ipAddressV4": "10.192.11.23"
+          }
+        }
+      },
+      "resourceRole": "ACTOR",
+      "additionalInfo": {},
+      "evidence": null,
+      "eventFirstSeen": "2021-03-20T13:52:52Z",
+      "eventLastSeen": "2021-03-20T13:55:19Z",
+      "archived": false,
+      "count": 1
+    },
+    "severity": 8,
+    "createdAt": "2021-03-20T13:56:55.291Z",
+    "updatedAt": "2021-03-20T13:56:55.291Z",
+    "title": "i-08a2f3de02a01bd6c is performing SSH brute force attacks against 10.192.10.14.",
+    "description": "i-08a2f3de02a01bd6c is performing SSH brute force attacks against 10.192.10.14. Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password."
+  }
+]

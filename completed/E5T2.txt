@@ -28,8 +28,9 @@ For containers' scanning for OS vulnerabilities, some popular tools would be
 
 For AMI's scanning for OS vulnerabilities, some popular tools would be
 1. AWS Inspector - https://aws.amazon.com/blogs/security/how-to-set-up-continuous-golden-ami-vulnerability-assessments-with-amazon-inspector/
-2. Digital Defense Frontline Vulnerability Manager - https://help.frontline.cloud/vm/en-us/Topics_MS/Install%20AWS%20AMI%20Scanner_AD.htm
-3. Tenable Nessus - https://www.tenable.com/nessus-demo
+2. Amazon ECR Image scanning - https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html
+3. Digital Defense Frontline Vulnerability Manager - https://help.frontline.cloud/vm/en-us/Topics_MS/Install%20AWS%20AMI%20Scanner_AD.htm
+4. Tenable Nessus - https://www.tenable.com/nessus-demo
 
 
 ### Example OS vulnerability in AMI or containers
